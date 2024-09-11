@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { Session } from "@supabase/supabase-js";
 
-
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
@@ -20,6 +19,7 @@ export async function GET(request: Request) {
         //console.log(event, "  ", session);
 
         if (session && session.provider_token) {
+          console.log(session.provider_refresh_token);
           // Store provider_token and provider_refresh_token in the database
           const { data, error } = await supabase
             .from("provider_tokens")
