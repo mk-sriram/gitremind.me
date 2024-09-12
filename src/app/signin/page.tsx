@@ -17,7 +17,7 @@ const page = () => {
     <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 bg-white w-[100%] ">
       <div className="max-w-md ">
         <div className="p-8 rounded-2xl bg-white drop-shadow-xl  h-[40%]">
-          <h2 className="text-gray-800 text-center text-2xl font-bold">
+          <h2 className="text--500 text-center text-2xl font-bold">
             Sign in
           </h2>
 
