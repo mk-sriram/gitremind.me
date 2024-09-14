@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-gray-50 tracking-tight text-gray-800 antialiased">
+      <body className="bg-white tracking-tight text-gray-800 antialiased">
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
           <Header />
           {children}

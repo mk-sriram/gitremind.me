@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header className="fixed mt-4 top-2 z-30 w-full md:top-6">
       <div className="mx-auto w-[80%] px-4 sm:px-6">
-        <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-gray-50/90 px-4 shadow-sm">
+        <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white/90 px-4 shadow-sm">
           {/* Site branding */}
 
           <a href="\" className="flex flex-1 items-center">
