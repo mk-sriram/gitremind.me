@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
+import useAuth from "@/utils/supabase/useAuth";
 
 export default function Header() {
   const [top, setTop] = useState<boolean>(true);
-
+  const { user, loading, handleSignOut } = useAuth();
   // detect whether user has scrolled the page down by 10px
   const scrollHandler = () => {
     window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -20,37 +21,44 @@ export default function Header() {
   }, [top]);
 
   return (
-    <header className="fixed top-2 z-30 w-full md:top-6">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-gray-50/90 px-4 shadow-sm shadow-black/[0.03] backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(theme(colors.gray.100),theme(colors.gray.200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
+    <header className="fixed mt-4 top-2 z-30 w-full md:top-6">
+      <div className="mx-auto w-[80%] px-4 sm:px-6">
+        <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-gray-50/90 px-4 shadow-sm">
           {/* Site branding */}
-          <div className="flex flex-1 items-center">
+
+          <a href="\" className="flex flex-1 items-center">
             <Image
               src="/logo.png"
               width={40}
               height={40}
               alt="Picture of the author"
             />
-            <span className="font-semibold"> GitRemind </span>
-          </div>
+            <span className="font-medium"> GitRemind </span>
+          </a>
 
           {/* Desktop sign in links */}
-          <ul className="flex flex-1 items-center justify-end gap-3">
+          <ul className="flex flex-1 items-center font-medium justify-end gap-3">
             <li>
               <Link
                 href="/signin"
-                className="btn-sm px-3 py-2 rounded-xl bg-white text-gray-800 shadow hover:bg-gray-50"
+                className="btn-sm px-3 py-2 rounded-xl text-gray-800 transition-colors duration-300 ease-in-out hover:bg-gray-100"
               >
-                Login
+                Demo
               </Link>
             </li>
             <li>
-              <Link
-                href="/signup"
-                className="btn-sm px-3 py-2 rounded-xl bg-gray-800 text-gray-200 shadow hover:bg-gray-900"
-              >
-                Github
-              </Link>
+              {!user ? (
+                <button className="btn-sm cusor-pointer px-3 py-2 rounded-xl text-gray-800 transition-colors duration-300 ease-in-out hover:bg-gray-100">
+                  Login
+                </button>
+              ) : (
+                <button
+                  onClick={handleSignOut}
+                  className="btn-sm cusor-pointer px-3 py-2 rounded-xl text-gray-800 transition-colors duration-300 ease-in-out hover:bg-gray-100"
+                >
+                  Sign Out
+                </button>
+              )}
             </li>
           </ul>
         </div>
