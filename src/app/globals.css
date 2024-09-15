@@ -33,19 +33,3 @@ body {
     --radius: 0.5rem;
   }
 }
-
-@layer utilities {
-  @keyframes glow {
-    0%,
-    100% {
-      filter: brightness(1);
-    }
-    50% {
-      filter: brightness(1.5);
-    }
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-}

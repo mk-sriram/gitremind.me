@@ -1,47 +1,7 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { createClient } from "@/utils/supabase/client";
 import { useUserInfo } from "@/utils/supabase/useAuth";
-
-interface AnimatedSquareProps {
-  delay: number;
-  color: string;
-}
-
-const AnimatedSquare: React.FC<AnimatedSquareProps> = ({ delay, color }) => (
-  <div
-    className={`w-12 h-12 rounded-sm ${color} animate-pulse`}
-    style={{
-      animationDelay: `${delay}s`,
-    }}
-  />
-);
-
-const SquareGrid: React.FC<{ className?: string }> = ({ className = "" }) => {
-  const colors: string[] = [
-    "bg-green-50 bg-opacity-60",
-    "bg-green-100 bg-opacity-90",
-    "bg-green-200 bg-opacity-20",
-    "bg-green-300 bg-opacity-50",
-    "bg-green-400 bg-opacity-50",
-    "bg-green-500 bg-opacity-50",
-    "bg-green-600 bg-opacity-50",
-    "bg-green-700 bg-opacity-50",
-    "bg-green-800 bg-opacity-50",
-  ];
-
-  return (
-    <div className={`grid grid-cols-9 grid-rows-9 gap-4 ${className}`}>
-      {[...Array(81)].map((_, i) => (
-        <AnimatedSquare
-          key={i}
-          delay={(i * 0.3) % 2}
-          color={colors[Math.floor(Math.random() * colors.length)]}
-        />
-      ))}
-    </div>
-  );
-};
+import SquareGrid from "./ui/Squaregrid";
 
 export default function HeroHome() {
   const supabase = createClient();
@@ -63,12 +23,9 @@ export default function HeroHome() {
         <div className="pb-12 pt-32 md:pb-20 md:pt-40w-full ">
           {/* Section header */}
           <div className="pb-12 mt-5  text-center md:pb-16">
-            <div
-              className="mb-6  [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]"
-              data-aos="zoom-y-out"
-            ></div>
+            <div className="mb-6  " data-aos="zoom-y-out"></div>
             <h1
-              className="mb-6 mt-3text-gray-900 text-5xl font-bold [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1] md:text-6xl"
+              className="mb-6 mt-5  text-gray-900 text-5xl font-bold  md:text-6xl"
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
@@ -85,7 +42,7 @@ export default function HeroHome() {
                 notification system powered by AI to help you stay on top of
                 your project contributions. Never miss a commit again.
               </p>
-              <div className="relative before:absolute before:inset-0 before: before:[border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]">
+              <div className="relative before:absolute before:inset-0 before: ">
                 <div
                   className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
                   data-aos="zoom-y-out"
@@ -123,18 +80,16 @@ export default function HeroHome() {
             </div>
           </div>
           {/* Hero image */}
-          <div className=" flex  justify-center w-[">
-            <div className="absolute left-0 right-0 flex justify-center">
-              <div className="flex items-center">
-                <div className=" justify-space w-[30vw] h-full mt-[100px]">
-                  <SquareGrid />
-                </div>
-                <div className="relative aspect-video w-[80rem] rounded-2xl bg-gray-100 px-5 py-3 shadow-xl z-10">
-                  wassup
-                </div>
-                <div className="justify-center w-[30vw] h-full mt-[100px]">
-                  <SquareGrid />
-                </div>
+          <div className=" flex justify-center ">
+            <div className="flex items-center justify-between">
+              <div className="flex-1 w-[30vw] h-[80%] ">
+                <SquareGrid />
+              </div>
+              <div className="relative aspect-video w-[80rem] rounded-2xl bg-gray-50 px-5 py-3 shadow-xl z-10">
+                wassup
+              </div>
+              <div className="flex-1 w-[30vw] h-[80%] ">
+                <SquareGrid />
               </div>
             </div>
           </div>
