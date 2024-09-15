@@ -1,30 +1,13 @@
+import ProjectCard from "./projectCard";
 
-
-const SquareGrid: React.FC = () => {
-  const colors: string[] = [
-    "bg-green-700 bg-opacity-10",
-    "bg-green-700 bg-opacity-20",
-    "bg-green-700 bg-opacity-40",
-    "bg-green-700 bg-opacity-20",
-    "bg-green-700 bg-opacity-50",
-    "bg-green-700 bg-opacity-40",
-    "bg-green-500 bg-opacity-20",
-    "bg-green-700 bg-opacity-40",
-    "bg-green-500 bg-opacity-40",
-    "bg-green-700 bg-opacity-10",
-  ];
-
+const ProjectGrid: React.FC = () => {
   return (
     <div className="grid grid-cols-9 gap-y-[3px] w-full h-full">
-      {[...Array(81)].map((_, i) => (
-        <AnimatedSquare
-          key={i}
-          delay={(i * 0.3) % 2}
-          color={colors[Math.floor(Math.random() * colors.length)]}
-        />
+      {[...Array(1)].map((_, i) => (
+        <ProjectCard />
       ))}
     </div>
   );
 };
 
-export default SquareGrid;
+export default ProjectGrid;

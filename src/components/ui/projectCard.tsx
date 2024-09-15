@@ -1,11 +1,9 @@
 import { UserInfo } from "@/utils/types";
 
 interface projectCardProps {
-  userInfo: UserInfo;
+  userInfo?: UserInfo;
 }
 
-const projectCard: React.FC<projectCardProps> = ({ userInfo }) => <>
+const ProjectCard: React.FC<projectCardProps> = ({ userInfo }) => <></>;
 
-
-
-</>;
+export default ProjectCard;
