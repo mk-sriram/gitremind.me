@@ -19,7 +19,16 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        play: [ "sans-serif"],
+        play: ["sans-serif"],
+      },
+      animation: {
+        glow: "glow 2s ease-in-out infinite",
+      },
+      keyframes: {
+        glow: {
+          "0%, 100%": { filter: "brightness(1)" },
+          "50%": { filter: "brightness(1.5)" },
+        },
       },
     },
   },

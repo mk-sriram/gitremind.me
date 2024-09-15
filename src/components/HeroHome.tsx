@@ -1,7 +1,48 @@
 "use client";
-
+import { motion, useScroll, useTransform } from "framer-motion";
 import { createClient } from "@/utils/supabase/client";
 import { useUserInfo } from "@/utils/supabase/useAuth";
+
+interface AnimatedSquareProps {
+  delay: number;
+  color: string;
+}
+
+const AnimatedSquare: React.FC<AnimatedSquareProps> = ({ delay, color }) => (
+  <div
+    className={`w-12 h-12 rounded-sm ${color} animate-pulse`}
+    style={{
+      animationDelay: `${delay}s`,
+    }}
+  />
+);
+
+const SquareGrid: React.FC<{ className?: string }> = ({ className = "" }) => {
+  const colors: string[] = [
+    "bg-green-50 bg-opacity-60",
+    "bg-green-100 bg-opacity-90",
+    "bg-green-200 bg-opacity-20",
+    "bg-green-300 bg-opacity-50",
+    "bg-green-400 bg-opacity-50",
+    "bg-green-500 bg-opacity-50",
+    "bg-green-600 bg-opacity-50",
+    "bg-green-700 bg-opacity-50",
+    "bg-green-800 bg-opacity-50",
+  ];
+
+  return (
+    <div className={`grid grid-cols-9 grid-rows-9 gap-4 ${className}`}>
+      {[...Array(81)].map((_, i) => (
+        <AnimatedSquare
+          key={i}
+          delay={(i * 0.3) % 2}
+          color={colors[Math.floor(Math.random() * colors.length)]}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function HeroHome() {
   const supabase = createClient();
   const { userInfo, loading } = useUserInfo();
@@ -16,32 +57,33 @@ export default function HeroHome() {
     });
   };
   return (
-    <section className="relative">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className=" flex justify-center  ">
+      <div className=" justify-center w-full max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
-        <div className="pb-12 pt-32 md:pb-20 md:pt-40">
+        <div className="pb-12 pt-32 md:pb-20 md:pt-40w-full ">
           {/* Section header */}
-          <div className="pb-12 text-center md:pb-16">
+          <div className="pb-12 mt-5  text-center md:pb-16">
             <div
               className="mb-6  [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]"
               data-aos="zoom-y-out"
             ></div>
             <h1
-              className="mb-6 text-green-600 text-5xl font-bold [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1] md:text-6xl"
+              className="mb-6 mt-3text-gray-900 text-5xl font-bold [border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1] md:text-6xl"
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
-              Your productivity <br className="max-lg:hidden" />
-              supercharged
+              <span className=" text-green-600 "> GitRemind: </span>
+              Commit Today,
+              <br className="max-lg:hidden" />
+              Remember Tomorrow
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
                 className="mb-8 text-lg  text-gray-700 font-medium"
                 data-aos="zoom-y-out"
               >
-                GitRemind is a notification system powered by AI that transforms
-                how developers stay on top of their project contributions. Never
-                miss a commit again.
+                notification system powered by AI to help you stay on top of
+                your project contributions. Never miss a commit again.
               </p>
               <div className="relative before:absolute before:inset-0 before: before:[border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]">
                 <div
@@ -81,9 +123,19 @@ export default function HeroHome() {
             </div>
           </div>
           {/* Hero image */}
-          <div className=" flex justify-center mx-auto w-full">
-            <div className="relative aspect-video w-[100rem] rounded-2xl bg-gray-100 px-5 py-3 shadow-xl ">
-              wassup
+          <div className=" flex  justify-center w-[">
+            <div className="absolute left-0 right-0 flex justify-center">
+              <div className="flex items-center">
+                <div className=" justify-space w-[30vw] h-full mt-[100px]">
+                  <SquareGrid />
+                </div>
+                <div className="relative aspect-video w-[80rem] rounded-2xl bg-gray-100 px-5 py-3 shadow-xl z-10">
+                  wassup
+                </div>
+                <div className="justify-center w-[30vw] h-full mt-[100px]">
+                  <SquareGrid />
+                </div>
+              </div>
             </div>
           </div>
         </div>
