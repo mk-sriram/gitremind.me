@@ -1,10 +1,11 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
-import useAuth from "@/utils/supabase/useAuth";
+import { useUserInfo } from "@/utils/supabase/useAuth";
 export default function HeroHome() {
   const supabase = createClient();
-  const { user, loading, handleSignOut } = useAuth();
+  const { userInfo, loading } = useUserInfo();
+  console.log("HERO", userInfo);
   const handleSignIn = async () => {
     console.log("SIGNING IN BUTTON GOOGLE CLICKED");
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -47,7 +48,7 @@ export default function HeroHome() {
                   className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
                   data-aos="zoom-y-out"
                 >
-                  {!user ? (
+                  {!userInfo.email ? (
                     <a
                       className="btn group px-6 py-3 rounded-full mb-4 w-full cursor-pointer active:scale-[0.99] hover:scale-[1.02] transition-transform ease-in-out duration-300 bg-gradient-to-t from-gray-700 to-gray-900 bg-[length:100%_100%] bg-[bottom] text-white shadow hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
                       onClick={handleSignIn}

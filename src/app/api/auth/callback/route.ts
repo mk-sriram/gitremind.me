@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 
     supabase.auth.onAuthStateChange(
       async (event: string, session: Session | null) => {
-        //console.log(event, "  ", session);
+        console.log(event, "  ", session);
 
         if (session && session.provider_token) {
           console.log(session.provider_refresh_token);

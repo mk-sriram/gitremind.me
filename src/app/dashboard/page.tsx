@@ -1,12 +1,29 @@
 "use client";
 
-const page = () => {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4 bg-white w-[100%] ">
+import { useUserInfo } from "@/utils/supabase/useAuth";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Dashboard from "@/components/Dashboard/Dashboard"; // Assuming Dashboard is in the same directory
 
-      WOAH DASHBOARD
-    </div>
-  );
+const DashboardPage = () => {
+  const { userInfo, loading } = useUserInfo();
+  const router = useRouter();
+  console.log("dashboard", userInfo);
+  useEffect(() => {
+    if (!loading && !userInfo.fullName) {
+      router.push("/");
+    }
+  }, [userInfo, loading, router]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a more sophisticated loading component
+  }
+
+  if (!userInfo.fullName) {
+    return null; // This will prevent any flash of content before redirect
+  }
+
+  return <Dashboard userInfo={userInfo} />;
 };
 
-export default page;
+export default DashboardPage;

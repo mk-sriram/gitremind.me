@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
-import useAuth from "@/utils/supabase/useAuth";
+import { useUserInfo, handleSignOut } from "@/utils/supabase/useAuth";
 
 export default function Header() {
   const [top, setTop] = useState<boolean>(true);
-  const { user, loading, handleSignOut } = useAuth();
+  const { userInfo, loading } = useUserInfo();
   // detect whether user has scrolled the page down by 10px
   const scrollHandler = () => {
     window.pageYOffset > 10 ? setTop(false) : setTop(true);
@@ -47,7 +47,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              {!user ? (
+              {!userInfo.email ? (
                 <button className="btn-sm cusor-pointer px-3 py-2 rounded-xl text-gray-800 transition-colors duration-300 ease-in-out hover:bg-gray-100">
                   Login
                 </button>

@@ -1,69 +1,49 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
+import { UserInfo } from "@/utils/types";
 
-const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+export const useUserInfo = () => {
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    fullName: null,
+    email: null,
+  });
   const [loading, setLoading] = useState(true);
 
   const supabase = createClient();
 
   useEffect(() => {
-    const getSession = async () => {
+    const getUserInfo = async () => {
       try {
         const {
           data: { user },
+          error,
         } = await supabase.auth.getUser();
-        setUser(user ?? null);
+        if (error) throw error;
+
+        setUserInfo({
+          fullName: user?.user_metadata?.full_name || null,
+          email: user?.email || null,
+        });
       } catch (error) {
-        console.error("Error getting session:", error);
+        console.error("Error fetching user info:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    getSession();
-
-    // Listen for auth state changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    // Cleanup the listener on unmount
-    return () => {
-      subscription?.unsubscribe();
-    };
+    getUserInfo();
   }, []);
 
-  const handleSignOut = useCallback(async () => {
-    try {
-      if (user) {
-        // Delete the provider tokens from the database
-        const { error: deleteError } = await supabase
-          .from("provider_tokens")
-          .delete()
-          .match({
-            user_id: user.id,
-            provider: user.app_metadata?.provider,
-          });
-
-        if (deleteError) {
-          console.error("Error deleting provider tokens:", deleteError);
-        } else {
-          console.log("Provider tokens deleted successfully.");
-        }
-      }
-
-      // Sign out the user
-      await supabase.auth.signOut();
-    } catch (err) {
-      console.error("Error during sign out:", err);
-    }
-  }, [user]);
-
-  return { user, loading, handleSignOut };
+  return { userInfo, loading };
 };
 
-export default useAuth;
+export const handleSignOut = async () => {
+  console.log("signoutCalled");
+  const supabase = createClient();
+  try {
+    await supabase.auth.signOut();
+    console.log("User signed out successfully");
+  } catch (error) {
+    console.error("Error signing out:", error);
+  }
+};
