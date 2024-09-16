@@ -12,7 +12,7 @@ export default function HeroHome() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: `http://localhost:3000/api/auth/callback`,
+        redirectTo: `http://gitremind.me/api/auth/callback`,
       },
     });
   };
