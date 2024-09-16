@@ -19,18 +19,18 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({ userInfo }) => {
           throw new Error("Failed to fetch project data");
         }
         const data = await response.json();
-        const formattedData = data.map((repo) => ({
+        const formattedData = data.map((repo: any) => ({
           id: repo.name,
           title: repo.name,
           description: repo.description,
           url: repo.url,
           contributions: repo.defaultBranchRef.target.history.nodes.map(
-            (node) => node.committedDate
+            (node: any) => node.committedDate
           ),
         }));
         setProjects(formattedData);
-      } catch (err) {
-        setError(err.message);
+      } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
