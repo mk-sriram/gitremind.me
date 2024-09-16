@@ -20,11 +20,11 @@ gitremind.me is an innovative tool designed to boost developer productivity by p
 
 ## Technology Stack
 
-- Frontend: Next.js, React
-- Backend: Node.js
+- Frontend: Next.js
+- Backend: vercel function 
 - AI Integration: GPT-based language model
-- Data Visualization: D3.js
 - Authentication: OAuth with GitHub
+- Supabase database
 
 ## Try It Out
 
