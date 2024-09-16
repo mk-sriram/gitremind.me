@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ProjectGrid from "@/components/ui/ProjectGrid";
+import ProjectGrid from "./ProjectGrid";
 import { UserInfo } from "@/utils/types";
 import HelpBar from "./HelpBar";
 interface DashboardProps {
