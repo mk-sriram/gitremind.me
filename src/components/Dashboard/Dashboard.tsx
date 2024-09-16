@@ -16,8 +16,6 @@ const Dashboard: React.FC<DashboardProps> = ({ userInfo }) => {
         <div className="flex flex-col justify-center pb-12 text-center mt-[150px] md:pb-16">
           <h1
             className="mb-6  text-gray-900 text-2xl font-semibold md:text-5xl"
-            data-aos="zoom-y-out"
-            data-aos-delay={150}
           >
             Good morning, {userInfo.fullName}
           </h1>
