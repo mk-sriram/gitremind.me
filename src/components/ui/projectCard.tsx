@@ -15,7 +15,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, userInfo }) => {
   return (
-    <div className="bg-gray-50 p-4 rounded-lg shadow-lg w-[50rem] h-[17rem] relative">
+    <div className="bg-gray-50 p-4 rounded-lg shadow-lg w-[400px] h-[17rem] relative m-5">
       <div className="flex flex-col h-full">
         <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
         {project.description && (
@@ -27,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, userInfo }) => {
           </a>
         )}
         {project.contributions && (
-          <div className="mt-auto w-[45rem]">
+          <div className="mt-auto w-full h-[30rem]">
             <h4 className="text-sm font-semibold mb-1">Contributions</h4>
             <ContributionsSVG contributions={project.contributions} />
           </div>

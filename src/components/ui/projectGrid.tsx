@@ -42,9 +42,9 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({ userInfo }) => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="grid grid-cols-2 gap-10 w-full h-full">
-      {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} userInfo={userInfo} />
+    <div className="grid grid-cols-2 gap-10   w-[120%] h-full">
+      {projects.map((project, id) => (
+        <ProjectCard key={id} project={project} userInfo={userInfo} />
       ))}
     </div>
   );
