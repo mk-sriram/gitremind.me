@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { UserInfo } from "@/utils/types";
 import ProjectCard from "./ProjectCard";
 
@@ -6,13 +7,39 @@ interface ProjectGridProps {
 }
 
 const ProjectGrid: React.FC<ProjectGridProps> = ({ userInfo }) => {
-  // This is just a placeholder. In a real application, you'd probably fetch projects from an API
-  const projects = [
-    { id: 1, title: "Project 1" },
-    { id: 2, title: "Project 2" },
-    { id: 3, title: "Project 3" },
-    { id: 4, title: "Project 4" },
-  ];
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const response = await fetch("/api/github-data");
+        if (!response.ok) {
+          throw new Error("Failed to fetch project data");
+        }
+        const data = await response.json();
+        const formattedData = data.map((repo) => ({
+          id: repo.name,
+          title: repo.name,
+          description: repo.description,
+          url: repo.url,
+          contributions: repo.defaultBranchRef.target.history.nodes.map(
+            (node) => node.committedDate
+          ),
+        }));
+        setProjects(formattedData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProjects();
+  }, []);
+
+  if (loading) return <div>Loading projects...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="grid grid-cols-2 gap-10 w-full h-full">
