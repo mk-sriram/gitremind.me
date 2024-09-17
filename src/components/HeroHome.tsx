@@ -85,7 +85,7 @@ export default function HeroHome() {
               <div className="flex-1 w-[30vw] h-[80%] ">
                 <SquareGrid />
               </div>
-              <div className="relative aspect-video w-[80rem] rounded-2xl bg-gray-50 px-5 py-3 shadow-xl z-10">
+              <div className="relative aspect-video w-[75rem] rounded-2xl bg-gray-50 px-5 py-3 shadow-xl z-10">
                 wassup
               </div>
               <div className="flex-1 w-[30vw] h-[80%] ">
