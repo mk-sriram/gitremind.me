@@ -58,7 +58,7 @@ export async function GET(request: Request) {
       }
     );
 
-    //console.log("server side: ", data);
+    console.log("server side: ", data);
     if (!error) {
       // const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       // const isLocalEnv = process.env.NODE_ENV === "development";

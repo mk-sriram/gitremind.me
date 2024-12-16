@@ -20,7 +20,7 @@ const DashboardPage = () => {
   }
 
   if (!userInfo.fullName) {
-    return null; // This will prevent any flash of content before redirect
+    return null; 
   }
 
   return <Dashboard userInfo={userInfo} />;
